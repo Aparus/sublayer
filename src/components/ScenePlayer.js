@@ -42,8 +42,10 @@ export class ScenePlayer extends Component {
     const { currentPhrase } = this.state;
     const actors = sceneActors.map(actorId => allActors[actorId]);
 
-    const borderColor = actorId => (actorId === phrases[currentPhrase].actor ? "red" : "green");
+    /*     const borderColor = actorId => (actorId === phrases[currentPhrase].actor ? "red" : null);
     const border = actorId => (actorId === phrases[currentPhrase].actor ? 5 : 0);
+
+    const borderProps = {} */
 
     return (
       <div>
@@ -52,8 +54,8 @@ export class ScenePlayer extends Component {
             {actors.map(actor => {
               return (
                 <Box
-                  borderColor={borderColor(actor.id)}
-                  border={border(actor.id)}
+                  borderColor={actor.id === phrases[currentPhrase].actor ? "red" : undefined}
+                  border={actor.id === phrases[currentPhrase].actor ? 5 : undefined}
                   key={actor.name}
                   clone
                 >
