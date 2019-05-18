@@ -1,4 +1,5 @@
 import data from "./data";
+import IconsTest from "./IconsTest";
 
 import React, { Component } from "react";
 
@@ -9,6 +10,7 @@ export class ScenePlayer extends Component {
     const actors = sceneActors.map(actorId => allActors[actorId]);
     return (
       <div>
+        <IconsTest />
         <ul>
           {actors.map(actor => (
             <li key={actor.name}>
