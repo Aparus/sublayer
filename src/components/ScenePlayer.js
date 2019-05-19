@@ -21,7 +21,8 @@ export class ScenePlayer extends Component {
   state = { currentTime: 0, currentPhrase: 0 };
 
   componentDidMount() {
-    const { phrases } = data.scenes[0];
+    let { phrases } = data.scenes[0];
+    phrases = Object.keys(phrases).map(id => ({ id, ...phrases[id] })); //object to array, with key inside
 
     const timer = setInterval(() => {
       const { currentTime, currentPhrase } = this.state;
@@ -35,10 +36,11 @@ export class ScenePlayer extends Component {
 
   render() {
     const { classes } = this.props;
-    const { actors: allActors } = data;
+    let allActors = data.actors;
+    allActors = Object.keys(allActors).map(id => ({ id, ...allActors[id] })); //object to array, with key inside
     const { actors: sceneActors, phrases } = data.scenes[0];
     const { currentPhrase } = this.state;
-    const actors = sceneActors.map(actorId => allActors[actorId]);
+    const actors = allActors.filter(elem => sceneActors.includes(elem.id));
 
     return (
       <div>
