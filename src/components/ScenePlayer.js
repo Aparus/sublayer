@@ -1,21 +1,19 @@
 import data from "./data";
 import { withStyles } from "@material-ui/core/styles";
-import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import { unstable_Box as Box } from "@material-ui/core/Box";
-import { borders } from "@material-ui/system";
+import Avatar from "./Avatar";
 
 import React, { Component } from "react";
 
 const styles = {
-  avatar: {
-    margin: 10
-  },
   paper: {
     width: "50%",
     height: 250,
     margin: 20
+  },
+  dialog: {
+    marginTop: 30
   }
 };
 
@@ -42,29 +40,17 @@ export class ScenePlayer extends Component {
     const { currentPhrase } = this.state;
     const actors = sceneActors.map(actorId => allActors[actorId]);
 
-    /*     const borderColor = actorId => (actorId === phrases[currentPhrase].actor ? "red" : null);
-    const border = actorId => (actorId === phrases[currentPhrase].actor ? 5 : 0);
-
-    const borderProps = {} */
-
     return (
       <div>
         <Paper className={classes.paper}>
           <Grid container justify="center" alignItems="center">
             {actors.map(actor => {
-              return (
-                <Box
-                  borderColor={actor.id === phrases[currentPhrase].actor ? "red" : undefined}
-                  border={actor.id === phrases[currentPhrase].actor ? 5 : undefined}
-                  key={actor.name}
-                  clone
-                >
-                  <Avatar alt={actor.name} src={actor.avatar} className={classes.avatar} />
-                </Box>
-              );
+              return <Avatar actor={actor} active={actor.id === phrases[currentPhrase].actor} />;
             })}
           </Grid>
-          {phrases[currentPhrase].text}
+          <Grid container justify="center" alignItems="center" className={classes.dialog}>
+            {phrases[currentPhrase].text}
+          </Grid>
         </Paper>
       </div>
     );
